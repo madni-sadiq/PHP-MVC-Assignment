@@ -20,4 +20,6 @@ $app -> router -> post('/contact', [SiteController::class, 'contact']);
 $app -> router -> get('/logout',[AuthController::class, 'logout']);
 $app -> router -> get('/subjectAdd',[AuthController::class, 'subjectAdd']);
 $app -> router -> post('/subjectAdd',[AuthController::class, 'subjectAdd']);
+$app -> router -> get('/SubjectJoin',[AuthController::class, 'subjectJoin']);
+$app -> router -> post('/Enroll',[AuthController::class, 'Enroll']);
 $app->run();

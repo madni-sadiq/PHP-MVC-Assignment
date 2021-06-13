@@ -35,35 +35,26 @@ use app\core\Application;
                 </li>
             </ul>
             <?php if (Application::isGuest()):?>
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 
-                <li class="nav-item active">
-                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" aria-current="page" href="/Teacherregister">Teacher SignUp</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" aria-current="page" href="/Studentregister">Student SignUp</a>
-                </li>
-
-            </ul>
-            <?php else:?>
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <?php if (get_class(Application::$app->user) === \app\models\TeacherModel::class):?>
-                <li class="nav-item active">
-                    <a class="nav-link active" aria-current="page" href="/subjectAdd">Add Subject</a>
-                </li>
-                <?php else:?>
                     <li class="nav-item active">
-                        <a class="nav-link active" aria-current="page" href="/SubjectJoin">Enroll Subject</a>
+                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
                     </li>
-                <?php endif;?>
+                    <li class="nav-item active">
+                        <a class="nav-link active" aria-current="page" href="/Teacherregister">Teacher SignUp</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link active" aria-current="page" href="/Studentregister">Student SignUp</a>
+                    </li>
 
-                <li class="nav-item active">
-                <a class="nav-link active" aria-current="page" href="/logout">Welcome <?php echo Application::$app->user->getDisplayName() ?> (Logout)</a>
-            </li>
-            </ul>
+                </ul>
+            <?php else:?>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item active">
+                        <a class="nav-link active" aria-current="page" href="/logout">Welcome <?php echo Application::$app->user->getDisplayName() ?> (Logout)</a>
+                    </li>
+                </ul>
             <?php endif; ?>
         </div>
     </div>
@@ -74,7 +65,12 @@ use app\core\Application;
             <?php echo Application::$app->session->getFlash('success') ?>
         </div>
     <?php endif; ?>
-{{Content}}
+    <?php if (Application::$app->session->getFlash('danger')):?>
+        <div class="alert alert-danger">
+            <?php echo Application::$app->session->getFlash('danger') ?>
+        </div>
+    <?php endif; ?>
+    {{Content}}
 </div>
 <!-- Optional JavaScript; choose one of the two! -->
 

@@ -26,7 +26,7 @@ $this->title = 'Student Register';
             $('#lastnamecheck').hide();
             $('#departmentcheck').hide();
             $('#sectioncheck').hide();
-            $('#emailcheck').hide();
+          //  $('#emailcheck').hide();
             $('#passwordcheck').hide();
             $('#ConfirmPasswordcheck').hide();
             $('#rollnocheck').hide();
@@ -304,6 +304,7 @@ $this->title = 'Student Register';
                      return false;
                  }
                  else{
+                     $('#emailcheck').show();
                      return true;
                  }
             })

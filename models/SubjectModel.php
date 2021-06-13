@@ -5,6 +5,7 @@ namespace app\models;
 
 
 use app\core\UserModel;
+use PDO;
 
 class SubjectModel extends UserModel
 {
@@ -74,5 +75,19 @@ class SubjectModel extends UserModel
             'Etime' => 'End time'
         ];
     }
+
+    public function retrieve()
+    {
+        $subject = self::tableName();
+        $teacher = TeacherModel::tableName();
+        $statement = self::prepare("SELECT $subject.id, firstname, lastname, Sname, Stime, Etime FROM $subject,$teacher WHERE $subject.email = $teacher.email ;");
+
+
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
 
 }

@@ -5,6 +5,9 @@ namespace app\core;
 
 
 use app\core\Application;
+
+use app\models\StudentModel;
+use app\models\TeacherModel;
 use http\Params;
 
 abstract class Model
@@ -54,15 +57,25 @@ abstract class Model
                         $this->addErrorForRule($attribute, self::RULE_MATCH, $rule);
                     }
                     if ($ruleName === self::RULE_EXIST){
-                        $className = $rule['class'];
+                       // $className = $rule['class'];
                         $uniqueAttr = $rule['attribute'] ?? $attribute;
-                        $tableName = $className::tableName();
+                        $tableName = StudentModel::tableName();
                         $statement = Application::$app->db->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :attr ");
                         $statement->bindValue(":attr", $value);
                         $statement->execute();
                         $record = $statement->fetchObject();
                         if ($record) {
                             $this->addErrorForRule($attribute, self::RULE_EXIST, ['exist'=>$attribute]);
+                        }
+                        else{
+                            $tableName = TeacherModel::tableName();
+                            $statement = Application::$app->db->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :attr ");
+                            $statement->bindValue(":attr", $value);
+                            $statement->execute();
+                            $record = $statement->fetchObject();
+                            if ($record) {
+                                $this->addErrorForRule($attribute, self::RULE_EXIST, ['exist'=>$attribute]);
+                            }
                         }
                         }
                 }
