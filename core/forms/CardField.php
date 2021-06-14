@@ -46,7 +46,7 @@ class CardField
         <h6 class="card-title">Instructor: %s %s</h6>
         <p class="card-text">Start Time: %s<br>End Time: %s</p>
         <form action="/Enroll" method="post">
-        <input type = "text" name = "sid" value = "%s">
+        <input hidden type = "text" name = "sid" value = "%s">
         <input  type = "submit" value = "Enroll" class = "btn btn-block btn-primary">
         </form>
     </div>

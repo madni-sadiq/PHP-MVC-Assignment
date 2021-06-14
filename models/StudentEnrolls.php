@@ -90,18 +90,9 @@ class StudentEnrolls
         $Stime = $where['Stime'];
         $Etime = $where['Etime'];
 
-
-      //  $sql = implode(" AND ", array_map(fn($attr)=> "$attr = :$attr", $attribute));
         $statement = DBModel::prepare("SELECT * FROM $tableName WHERE (email = '$email') AND (Stime < '$Stime' AND Etime > '$Stime')
                                                                                             OR (Stime < '$Etime' AND Etime > '$Etime');");
-//
-//        foreach ($where as $key => $item)
-//        {
-//            $statement->bindValue(":$key", $item);
-//
-//        }
-        //var_dump($statement);
-       // exit;
+
         $statement->execute();
         return (bool)$statement->fetchObject();
     }
